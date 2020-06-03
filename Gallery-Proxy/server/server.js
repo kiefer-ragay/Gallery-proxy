@@ -16,9 +16,9 @@ app.use(express.static(path.join(__dirname, '../public/')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/api/images/:id', (req, res) => {
+app.get('/api/products/:id', (req, res) => {
   axios
-    .get(`http://54.176.112.170:3001/api/images/${req.params.id}`)
+    .get(`http://localhost:3001/api/products/${req.params.id}`)
     .then((response) => {
       res.status(200).send(response.data);
     })
