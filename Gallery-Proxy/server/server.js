@@ -1,10 +1,12 @@
+require('dotenv').config();
 const express = require('express');
 const compression = require('compression');
 
 const app = express();
 const path = require('path');
 
-const port = 3005;
+const port = process.env.PROXY_PORT || 3005;
+const gallery = process.env.GALLERY;
 const axios = require('axios');
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -18,7 +20,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/api/products/:id', (req, res) => {
   axios
-    .get(`http://localhost:3001/api/products/${req.params.id}`)
+    .get(`${gallery}/api/products/${req.params.id}`)
     .then((response) => {
       res.status(200).send(response.data);
     })
